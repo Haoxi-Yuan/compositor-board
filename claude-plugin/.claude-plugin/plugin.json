@@ -1,0 +1,7 @@
+{
+  "name": "compositor-board",
+  "description": "Read Compositor (.comp) boards the person draws on in VS Code or the Compositor app, act on the notes they pin there (changing their workspace files by default), and draw on the board when asked.",
+  "version": "0.3.2",
+  "author": { "name": "Haoxi Yuan" },
+  "license": "MIT"
+}

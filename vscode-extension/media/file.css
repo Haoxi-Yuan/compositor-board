@@ -1,0 +1,102 @@
+/* The File menu's views (media/file.js): the New canvas form, the RAW develop, Photoshop conversion and Export As
+   sheets, and the drop highlight. */
+
+/* Pop-up menus open over the welcome view and the sheets too. */
+body > .menu { z-index: 95; }
+
+/* The New Canvas tab: the form alone, centred, as Compositor's empty tab shows it. */
+.welcome.new-canvas-tab { align-items: center; }
+.welcome.new-canvas-tab .welcome-card { max-width: 500px; }
+.welcome .nc-host { margin: 14px 0 22px; }
+
+/* New canvas (UI/NewCanvasSheet.swift:92-180): title, size fields, pills, buttons. */
+.new-canvas { display: flex; flex-direction: column; gap: 24px; }
+.new-canvas.disabled { opacity: 0.5; pointer-events: none; }
+.nc-head { display: flex; align-items: center; }
+.nc-title { font-size: 17px; font-weight: 600; flex: 1; }
+.nc-presets { width: 28px; height: 28px; border: 0; background: transparent; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 2.5px; padding: 0; cursor: default; }
+.nc-presets i { width: 2.5px; height: 2.5px; border-radius: 50%; background: var(--text); }
+.nc-dims { display: flex; align-items: flex-start; gap: 16px; }
+.nc-dim { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.nc-label { font-weight: 500; font-size: 12px; }
+.nc-field { display: flex; align-items: center; gap: 6px; padding: 12px; border-radius: 7px; background: rgba(255, 255, 255, 0.05); }
+.nc-field input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--text); font: inherit; font-size: 13px; outline: none; padding: 0; }
+.nc-unit { color: var(--text2); }
+.nc-times { color: var(--text3); padding-top: 32px; }
+/* The side bar is narrow: the two sizes stack. */
+.welcome:not(.new-canvas-tab) .nc-dims { flex-direction: column; gap: 12px; }
+.welcome:not(.new-canvas-tab) .nc-dim { width: 100%; }
+.welcome:not(.new-canvas-tab) .nc-times { display: none; }
+.nc-pills { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; color: var(--text2); }
+.nc-pill { border: 0; background: transparent; color: var(--text2); font: inherit; font-variant-numeric: tabular-nums; padding: 2px 6px; border-radius: 999px; cursor: default; }
+.nc-pill:hover { background: rgba(255, 255, 255, 0.1); }
+.nc-invalid { color: #ff9f0a; margin-top: -12px; }
+.nc-buttons { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.nc-buttons .spacer { flex: 1; }
+
+/* Modal sheets over the board. */
+.file-sheet-backdrop { position: fixed; inset: 0; z-index: 75; display: grid; place-items: center; background: rgba(0, 0, 0, 0.18); padding: 16px; }
+.file-sheet {
+    display: flex; flex-direction: column; gap: 16px; padding: 24px; max-width: calc(100vw - 32px); max-height: calc(100vh - 32px); overflow: auto;
+    background: #2c2c2c; border: 1px solid var(--field-border); border-radius: 12px; box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55); outline: none;
+}
+.file-sheet .sheet-title { font-size: 17px; font-weight: 700; }
+.file-sheet .secondary { color: var(--text2); }
+.file-sheet .buttons { display: flex; align-items: center; gap: 8px; }
+.file-sheet .buttons .spacer { flex: 1; }
+
+/* Develop “name” (UI/RawDevelopSheet.swift). */
+.raw-preview { position: relative; width: 560px; height: 340px; max-width: 100%; border-radius: 6px; background: rgba(0, 0, 0, 0.35); display: grid; place-items: center; overflow: hidden; }
+.raw-preview img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+.raw-preview .raw-spinner { position: absolute; display: none; }
+.raw-sheet.working .raw-spinner { display: block; }
+.raw-preview .raw-importing { position: absolute; display: none; flex-direction: column; align-items: center; gap: 8px; padding: 16px; border-radius: 10px; background: rgba(40, 40, 40, 0.85); color: var(--text2); }
+.raw-sheet.importing .raw-importing { display: flex; }
+.raw-sheet.importing .raw-spinner { display: none; }
+.raw-row { display: flex; align-items: center; gap: 10px; }
+.raw-label { width: 110px; flex: none; }
+.raw-row input[type=range] { width: 300px; }
+.raw-value { width: 80px; text-align: right; color: var(--text2); font-variant-numeric: tabular-nums; }
+.raw-toggles { display: flex; gap: 20px; padding-left: 120px; }
+.raw-toggles label.check { display: flex; align-items: center; gap: 5px; }
+
+/* Open “name”? (UI/PSDConversionSheet.swift). */
+.psd-sheet { min-width: 520px; min-height: 360px; }
+.psd-list { flex: 1; min-height: 180px; overflow-y: auto; border-radius: 6px; background: rgba(0, 0, 0, 0.18); padding: 4px 10px; }
+.psd-row { padding: 4px 0; }
+.psd-layer { font-weight: 600; font-size: 13px; }
+.psd-reading { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 180px; }
+
+/* Export As (UI/ExportAsSheet.swift:78-196). */
+.export-sheet { width: 608px; }
+.ea-head { display: flex; align-items: center; gap: 8px; margin-bottom: -8px; }
+.ea-head .spacer { flex: 1; }
+.ea-preview { position: relative; width: 560px; height: 330px; max-width: 100%; background: #1f1f1f; overflow: hidden; }
+.ea-scroll { position: absolute; inset: 0; overflow: hidden; }
+.ea-scroll.zoomed { overflow: auto; cursor: grab; }
+.ea-scroll.dragging { cursor: grabbing; }
+.ea-stage { display: grid; place-items: center; min-width: 100%; min-height: 100%; }
+/* The canvas's checkerboard behind the image: 10-point squares of gray 0.30 and 0.35. */
+.ea-image {
+    background-color: #4d4d4d;
+    background-image: linear-gradient(45deg, #595959 25%, transparent 25%, transparent 75%, #595959 75%), linear-gradient(45deg, #595959 25%, transparent 25%, transparent 75%, #595959 75%);
+    background-size: 20px 20px;
+    background-position: 0 10px, 10px 0;
+}
+.ea-image img { display: block; width: 100%; height: 100%; }
+.ea-spinner { position: absolute; inset: 0; display: none; place-items: center; pointer-events: none; }
+.ea-spinner .spinner { padding: 14px; border-radius: 8px; }
+.ea-preview.updating .ea-spinner { display: grid; }
+.ea-grid { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline; }
+.ea-grid .group { display: flex; align-items: center; gap: 6px; }
+.ea-grid input.num { width: 64px; text-align: right; }
+.ea-grid input[type=range] { width: 300px; }
+.ea-quality-text { width: 45px; text-align: right; font-variant-numeric: tabular-nums; }
+.ea-foot { display: flex; align-items: center; gap: 12px; }
+.ea-foot .spacer { flex: 1; }
+.ea-size { font-variant-numeric: tabular-nums; }
+.ea-size.error { color: #ff453a; }
+
+/* A file dragged over the board: a 3-point accent outline inside the canvas area (ContentView.swift). */
+.drop-highlight { position: absolute; inset: 3px; border: 3px solid var(--accent); border-radius: 8px; pointer-events: none; z-index: 70; }
+.welcome > .drop-highlight { position: fixed; }

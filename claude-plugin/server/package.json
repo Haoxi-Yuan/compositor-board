@@ -1,0 +1,17 @@
+{
+  "name": "compositor-board-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MCP server that lets Claude read and edit Compositor (.comp) projects shared with the Compositor Board VS Code extension.",
+  "main": "index.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.7"
+  }
+}

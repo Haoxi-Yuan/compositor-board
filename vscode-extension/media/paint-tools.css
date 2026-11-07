@@ -1,0 +1,77 @@
+/* Paint tools (paint-tools.js) and the color picker's layout (UI/ColorPickerSheet.swift). */
+
+.options .secondary { color: var(--text2); white-space: nowrap; flex: none; }
+
+/* The Brush and Spot Healing swatch: rounded 4, a white 1 pt stroke inside, a black 1 pt border (BrushControls.swift:110-118). */
+.options .brush-swatch { border: 1px solid #000; box-shadow: inset 0 0 0 1px #fff; flex: none; }
+
+/* GradientControls.swatch: 56 x 18, a 4 pt checkerboard of 45 % gray on white under the two colors, black 50 % border. */
+.gradient-swatch {
+    position: relative;
+    flex: none;
+    width: 56px;
+    height: 18px;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: #fff;
+    background-image: conic-gradient(transparent 25%, rgba(128, 128, 128, 0.45) 0 50%, transparent 0 75%, rgba(128, 128, 128, 0.45) 0);
+    background-size: 8px 8px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.gradient-swatch span { position: absolute; inset: 0; border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5); }
+
+/* The mask's black-or-white choice from a palette swatch. */
+.mask-popover {
+    position: fixed;
+    z-index: 60;
+    background: #2a2a2a;
+    border: 1px solid var(--field-border);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.mask-popover .headline { font-weight: 600; font-size: 13px; }
+.mask-popover .buttons { display: flex; gap: 8px; }
+
+.rail .colors.disabled { opacity: 0.5; pointer-events: none; }
+
+/* Picker: the title bar with its close button (which cancels); preview with OK above Cancel at the top of the right
+   column, the fields at its foot (ColorPickerSheet.swift:20-46). */
+.picker .bar { position: relative; }
+.picker .picker-close {
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    border-radius: 50%;
+    border: 0;
+    background: #ff5f57;
+    cursor: default;
+}
+.picker .picker-close:hover { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35); }
+.picker .side { height: 256px; gap: 0; }
+.picker .top { display: flex; gap: 16px; align-items: flex-start; }
+.picker .preview { border-radius: 5px; flex: none; }
+.picker .ok-column { display: flex; flex-direction: column; gap: 8px; width: 90px; }
+.picker .ok-column .pill { width: 100%; height: 28px; }
+.picker .fields { margin-top: auto; padding-top: 12px; grid-template-columns: 14px auto; gap: 6px 8px; }
+.picker .fields .num { width: 52px; }
+.picker .fields .hex { width: 84px; }
+.picker .fields label.caption { cursor: ew-resize; color: var(--text); }
+.picker .caption-note { padding-top: 8px; font-size: 10px; }
+
+/* The header's pop-ups keep their width in the scrolling options row. */
+.options .gradient-colors, .options .mask-paint { flex: none; }
+.options .segmented, .options .gradient-swatch, .options label.check { flex: none; }
+
+/* Cancel and Apply sit outside the scrolling controls upstream (GradientControls.swift:42-45): kept in view here. */
+.options .gradient-actions { position: sticky; right: 0; display: flex; gap: 8px; flex: none; padding-left: 8px; background: var(--chrome); }
+
+/* The stage lays its own canvases over each other; the picker's field and hue strip stay in the panel's flow. */
+.stage .picker canvas { position: static; inset: auto; }
+.options .tool-options > .title { flex: none; }

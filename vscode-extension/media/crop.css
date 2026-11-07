@@ -1,0 +1,35 @@
+/* The Crop tool's header and the Image menu's sheets (Canvas Size, Image Size, Trim). */
+.crop-size { font-variant-numeric: tabular-nums; color: var(--text); white-space: nowrap; flex: none; }
+/* The Ratio pop-up is 170 pt wide, narrower when the header is (CropControls.swift:14). */
+.options .tool-options .crop-ratio-group { flex: 0 1 auto; min-width: 0; }
+.options .tool-options .crop-ratio { width: 170px; min-width: 76px; flex: 0 1 170px; }
+.crop-buttons { display: inline-flex; gap: 8px; margin-left: auto; }
+
+.transform-buttons { display: inline-flex; gap: 8px; margin-left: auto; opacity: 0; pointer-events: none; transition: opacity 0.12s ease-out; }
+.transform-buttons.shown { opacity: 1; pointer-events: auto; }
+/* Apply and Cancel stay in reach when the Move bar's fields scroll (TransformInspector keeps them outside the scroll). */
+.options .tool-options .transform-buttons, .options .tool-options .crop-buttons { position: sticky; right: 0; background: var(--chrome); padding-left: 8px; }
+.transform-fields.disabled .caption { opacity: 0.45; }
+.caption.scrub, .sheet-label.scrub { cursor: ew-resize; user-select: none; }
+.sheet-label.scrub.disabled { cursor: default; opacity: 0.45; }
+
+.floating-panel.geometry-sheet { width: 430px; max-width: calc(100% - 16px); }
+.geometry-sheet .sheet-body { display: flex; flex-direction: column; gap: 12px; }
+.geometry-sheet .panel-title { font-size: 15px; font-weight: 700; }
+.geometry-sheet .headline { font-weight: 600; }
+.geometry-sheet .secondary { color: var(--text2); }
+.geometry-sheet .callout { font-size: 12px; }
+.geometry-sheet .warning { color: #ff9f0a; }
+.geometry-sheet hr { border: none; border-top: 1px solid var(--border, rgba(255,255,255,0.12)); margin: 2px 0; width: 100%; }
+.geometry-sheet .sheet-row { display: flex; align-items: center; gap: 8px; }
+.geometry-sheet .sheet-row[hidden] { display: none; }
+.geometry-sheet .sheet-row .field { flex: 1; min-width: 0; }
+.geometry-sheet .anchor-area { display: flex; gap: 24px; align-items: flex-start; }
+.geometry-sheet .anchor-grid { display: grid; grid-template-columns: repeat(3, 25px); gap: 3px; margin-top: 8px; }
+.geometry-sheet .anchor { width: 25px; height: 25px; border-radius: 50%; border: 1.5px solid var(--text2); background: transparent; padding: 0; transform: scale(0.55); }
+.geometry-sheet .anchor.on { background: var(--accent); border-color: var(--accent); }
+.geometry-sheet .anchor-text { display: flex; flex-direction: column; gap: 8px; padding-top: 28px; }
+.geometry-sheet .radio-group { display: flex; flex-direction: column; gap: 6px; }
+.geometry-sheet .trim-grid { display: grid; grid-template-columns: max-content max-content; column-gap: 24px; row-gap: 8px; }
+.geometry-sheet .extension-swatch { width: 34px; height: 18px; border-radius: 4px; border: 1px solid #000; box-shadow: inset 0 0 0 1px #fff; cursor: pointer; }
+.geometry-sheet input.field { height: 22px; border-radius: 5px; border: 1px solid var(--field-border); background: var(--field); color: var(--text); padding: 0 6px; }

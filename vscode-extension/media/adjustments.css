@@ -1,0 +1,108 @@
+/* The Filter, Levels and Hue/Saturation panels (UI/FilterSheet.swift, LevelsSheet.swift, HueSaturationSheet.swift). */
+
+.floating-panel.fp-levels { width: 440px; padding: 24px; gap: 16px; }
+.floating-panel.fp-hueSaturation { width: 460px; padding: 24px; gap: 16px; }
+.floating-panel.committing .fp-body { opacity: 0.55; }
+.floating-panel .fp-body { display: flex; flex-direction: column; gap: 16px; }
+
+/* Slider rows share one title width: title, slider, field, unit (filters.md 19.2). */
+.fp-grid { display: grid; grid-template-columns: minmax(60px, max-content) 1fr 56px auto; column-gap: 10px; row-gap: 16px; align-items: center; }
+.fp-slider { display: contents; }
+.fp-row-span { grid-column: 1 / -1; }
+.fp-title { white-space: nowrap; cursor: ew-resize; user-select: none; }
+.fp-field { width: 56px; text-align: right; box-sizing: border-box; }
+.fp-range { width: 100%; min-width: 0; }
+
+/* Camera Raw's colored slider tracks (UI/CameraRawSlider.swift). */
+.fp-range.colored { -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: var(--track); outline: none; margin: 8px 0; }
+.fp-range.colored::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #f2f2f2;
+    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.fp-seg-row { display: flex; align-items: center; gap: 10px; }
+.fp-seg-row.fill .segmented { flex: 1; display: flex; }
+.fp-seg-row.fill .segmented button { flex: 1; }
+.fp-menu-row { display: flex; align-items: center; gap: 8px; }
+.fp-menu-row:not(.fixed) select { flex: 1; }
+.fp-text { line-height: 1.45; }
+.fp-text.secondary, .fp-text.callout { color: var(--text2); }
+.fp-text.callout { font-size: 12px; }
+.fp-heading { font-weight: 600; font-size: 13px; }
+.fp-text-row { display: flex; align-items: center; gap: 10px; }
+.fp-text-row input { flex: 1; }
+.fp-chars.mono { font-family: ui-monospace, Menlo, monospace; }
+
+/* Swatches: 24 pt, rounded 6, a white inner and a black outer edge (FilterSheet.swift:315-326). */
+.fp-swatch-row { display: flex; align-items: center; gap: 8px; }
+.fp-swatch { width: 24px; height: 24px; flex: none; padding: 0; border-radius: 6px; border: 1px solid #000; box-shadow: inset 0 0 0 1.5px #fff; cursor: pointer; }
+.fp-swatch:disabled { cursor: default; }
+
+/* Curves (UI/CurvesControls.swift). */
+.fp-curves { display: flex; flex-direction: column; gap: 12px; }
+.fp-curves .fp-channel { align-self: flex-start; }
+.fp-graph { display: block; width: 100%; height: 260px; cursor: crosshair; touch-action: none; }
+.fp-curve-row { display: flex; align-items: center; gap: 8px; }
+.fp-readout { font-variant-numeric: tabular-nums; }
+
+/* Gradient Map (GradientMapControls). */
+.fp-gradient-map { display: flex; flex-direction: column; gap: 12px; }
+.fp-gradient-bar { height: 20px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35); }
+.fp-gm-swatches { display: flex; gap: 20px; }
+.fp-gm-swatches span { display: flex; align-items: center; gap: 8px; }
+
+.filter-status { display: inline-flex; align-items: center; gap: 6px; }
+
+/* Levels (UI/LevelsSheet.swift). */
+.lv-channel { width: 180px; align-self: flex-start; }
+.lv-graph { position: relative; }
+.lv-histogram { display: block; width: 100%; height: 150px; }
+.lv-loading { position: absolute; left: 8px; top: 8px; }
+.lv-output-bar { height: 14px; background: linear-gradient(to right, #000, #fff); }
+.lv-handles { position: relative; height: 20px; }
+.lv-handle { position: absolute; top: 0; width: 22px; height: 20px; margin-left: -11px; padding: 0; border: 0; background: transparent; cursor: ew-resize; touch-action: none; }
+.lv-handle::before {
+    content: ''; position: absolute; left: 5px; top: 3px; border-left: 6px solid transparent; border-right: 6px solid transparent;
+    border-bottom: 11px solid var(--handle); filter: drop-shadow(0 0 0.6px #8e8e93);
+}
+.lv-handle.black { --handle: #000; }
+.lv-handle.gray { --handle: #8e8e93; }
+.lv-handle.white { --handle: #fff; }
+.lv-fields { display: flex; align-items: flex-end; }
+.lv-fields .spacer { flex: 1; }
+.lv-field { display: flex; flex-direction: column; gap: 5px; }
+.lv-field input { width: 80px; text-align: right; box-sizing: border-box; }
+.lv-scrub { cursor: ew-resize; user-select: none; }
+.lv-sample { display: flex; align-items: center; gap: 8px; }
+.lv-eyedropper { display: inline-flex; align-items: center; gap: 4px; }
+.lv-eyedropper svg { width: 14px; height: 14px; }
+.lv-eyedropper.on { color: var(--accent); border-color: var(--accent); }
+.lv-auto { display: flex; flex-direction: column; gap: 6px; }
+.lv-auto > div { display: flex; gap: 8px; flex-wrap: wrap; }
+.lv-row, .hs-row { display: flex; align-items: center; gap: 18px; }
+.lv-row .spacer { flex: 1; }
+
+/* Hue/Saturation (UI/HueSaturationSheet.swift). */
+.hs-top { display: flex; align-items: center; gap: 6px; }
+.hs-top .spacer { flex: 1; }
+.hs-range { width: 160px; }
+.hs-dropper, .hs-target { width: 28px; height: 24px; border-radius: 4px; }
+.hs-dropper svg, .hs-target svg { width: 18px; height: 18px; }
+.hs-dropper.armed, .hs-target.armed { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.hs-divider { width: 1px; height: 16px; background: var(--divider, rgba(255, 255, 255, 0.15)); margin: 0 2px; }
+.hs-slider { display: grid; grid-template-columns: 76px 1fr 48px auto; column-gap: 10px; align-items: center; }
+.hs-slider .num { width: 48px; text-align: right; box-sizing: border-box; }
+.hs-spectrum { display: flex; flex-direction: column; gap: 5px; }
+.hs-bar { display: block; width: 100%; height: 16px; border-radius: 3px; }
+.hs-handles { display: block; width: 100%; height: 12px; cursor: ew-resize; touch-action: none; }
+.mono-digits { font-variant-numeric: tabular-nums; }
+
+/* The stage positions its own canvases absolutely; the panels' graphs stay in the flow. */
+.floating-panel canvas.fp-graph, .floating-panel canvas.lv-histogram, .floating-panel canvas.hs-bar, .floating-panel canvas.hs-handles {
+    position: static; inset: auto; pointer-events: auto;
+}
+.floating-panel canvas.fp-graph { width: 100%; height: 260px; }
+.floating-panel canvas.lv-histogram { width: 100%; height: 150px; }
+.floating-panel canvas.hs-bar { width: 100%; height: 16px; }
+.floating-panel canvas.hs-handles { width: 100%; height: 12px; }
+.hs-spectrum .caption { white-space: pre; }

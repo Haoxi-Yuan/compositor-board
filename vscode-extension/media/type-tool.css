@@ -1,0 +1,85 @@
+/* The Type tool: its options bar (UI/TypeControls.swift), the font menu, and the hidden input surface. */
+
+.type-header { display: flex; align-items: center; gap: 10px; }
+
+/* The font pop-up: 210 pt, the name truncated at the tail. */
+.type-font {
+    width: 210px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 6px 0 10px;
+    border: 1px solid var(--field-border);
+    border-radius: 999px;
+    background: var(--field);
+    cursor: default;
+    flex: none;
+}
+.type-font:hover:not(:disabled) { background: rgba(255, 255, 255, 0.12); }
+.type-font:disabled { opacity: 0.4; }
+.type-font-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
+.type-font-chevron svg { width: 11px; height: 11px; display: block; }
+
+/* 36 x 18, radius 3, 1 pt black 50 % border. */
+.type-color {
+    width: 36px;
+    height: 18px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    cursor: default;
+    flex: none;
+}
+
+/* Three 30 x 26 buttons 2 pt apart; the current one on a 14 % white rounded background. */
+.type-aligns { display: flex; gap: 2px; }
+.type-align { width: 30px; height: 26px; border-radius: 4px; }
+.type-align.on { background: rgba(255, 255, 255, 0.14); }
+.type-align svg { width: 15px; height: 15px; }
+.options .type-scrub { cursor: ew-resize; }
+
+.type-font-menu {
+    position: fixed;
+    z-index: 70;
+    width: 320px;
+    overflow-y: auto;
+    outline: none;
+}
+.type-font-space { position: relative; }
+.type-font-row {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0 8px 0 4px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: default;
+}
+.type-font-row.on { background: var(--accent); color: #fff; }
+.type-font-row .check { width: 14px; flex: none; text-align: center; }
+.type-font-row .face { height: 22px; flex: none; background: currentColor; -webkit-mask-repeat: no-repeat; }
+.type-font-row .plain { overflow: hidden; text-overflow: ellipsis; font-size: 13px; }
+
+/* The keyboard and IME target: at the caret, invisible, never in the way of the pointer. */
+.type-input {
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    padding: 0;
+    border: 0;
+    margin: 0;
+    opacity: 0;
+    resize: none;
+    overflow: hidden;
+    white-space: pre;
+    color: transparent;
+    caret-color: transparent;
+    background: transparent;
+    pointer-events: none;
+    z-index: 1;
+}

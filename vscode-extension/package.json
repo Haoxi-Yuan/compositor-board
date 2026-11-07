@@ -1,0 +1,330 @@
+{
+  "name": "compositor-board",
+  "displayName": "Compositor Board",
+  "description": "Draw on Compositor (.comp) image projects in a VS Code tab or the side bar, with the brush, shape and transform behavior ported from the Compositor app, while Claude reads and draws on the same board.",
+  "version": "0.6.6",
+  "publisher": "haoxi-local",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "image editor",
+    "drawing",
+    "compositor",
+    "photoshop",
+    "claude"
+  ],
+  "main": "./extension.js",
+  "extensionKind": [
+    "ui"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "compositorBoard.board",
+        "displayName": "Compositor Board",
+        "selector": [
+          {
+            "filenamePattern": "**/*.comp/manifest.json"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "compositorBoard.new",
+        "title": "New Board…",
+        "category": "Compositor Board",
+        "icon": "$(add)"
+      },
+      {
+        "command": "compositorBoard.open",
+        "title": "Open Board in Editor",
+        "category": "Compositor Board"
+      },
+      {
+        "command": "compositorBoard.showInSidebar",
+        "title": "Open Board in Side Bar",
+        "category": "Compositor Board",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "compositorBoard.sidebar.openInEditor",
+        "title": "Move Board to Editor Tab",
+        "category": "Compositor Board",
+        "icon": "$(empty-window)"
+      },
+      {
+        "command": "compositorBoard.sidebar.close",
+        "title": "Close Board in Side Bar",
+        "category": "Compositor Board",
+        "icon": "$(close)"
+      },
+      {
+        "command": "compositorBoard.openInCompositor",
+        "title": "Open in Compositor App",
+        "category": "Compositor Board",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "compositorBoard.openRecent",
+        "title": "Open Recent Board…",
+        "category": "Compositor Board"
+      },
+      {
+        "command": "compositorBoard.clearRecent",
+        "title": "Clear Recently Opened Boards",
+        "category": "Compositor Board"
+      },
+      {
+        "command": "compositorBoard.importImages",
+        "title": "Import Images…",
+        "category": "Compositor Board"
+      },
+      {
+        "command": "compositorBoard.newFromImages",
+        "title": "New Board from Image",
+        "category": "Compositor Board"
+      },
+      {
+        "command": "compositorBoard.saveAs",
+        "title": "Save Project As…",
+        "category": "Compositor Board"
+      },
+      {
+        "command": "compositorBoard.exportPNG",
+        "title": "Export PNG…",
+        "category": "Compositor Board"
+      },
+      {
+        "command": "compositorBoard.exportJPEG",
+        "title": "Export JPEG…",
+        "category": "Compositor Board"
+      },
+      {
+        "command": "compositorBoard.exportAs",
+        "title": "Export As…",
+        "category": "Compositor Board",
+        "icon": "$(export)"
+      },
+      {
+        "command": "compositorBoard.closeBoard",
+        "title": "Close Project",
+        "category": "Compositor Board"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "compositorBoard.open",
+          "when": "explorerResourceIsFolder && resourceExtname == .comp",
+          "group": "navigation@10"
+        },
+        {
+          "command": "compositorBoard.showInSidebar",
+          "when": "explorerResourceIsFolder && resourceExtname == .comp",
+          "group": "navigation@11"
+        },
+        {
+          "command": "compositorBoard.openInCompositor",
+          "when": "explorerResourceIsFolder && resourceExtname == .comp",
+          "group": "navigation@12"
+        },
+        {
+          "command": "compositorBoard.newFromImages",
+          "when": "!explorerResourceIsFolder && resourceExtname =~ /^\\.(jpe?g|jpe|png|heic|heif|hif|tiff?|webp|exr|hdr|pic|psd|psb|svgz?|dng|cr2|cr3|crw|nef|nrw|arw|srf|sr2|raf|orf|rw2|raw|rwl|pef|srw|3fr|fff|iiq|mos|mrw|erf|dcr)$/i",
+          "group": "navigation@13"
+        },
+        {
+          "command": "compositorBoard.importImages",
+          "when": "!explorerResourceIsFolder && resourceExtname =~ /^\\.(jpe?g|jpe|png|heic|heif|hif|tiff?|webp|exr|hdr|pic|psd|psb|svgz?|dng|cr2|cr3|crw|nef|nrw|arw|srf|sr2|raf|orf|rw2|raw|rwl|pef|srw|3fr|fff|iiq|mos|mrw|erf|dcr)$/i",
+          "group": "navigation@14"
+        },
+        {
+          "command": "compositorBoard.newFromImages",
+          "when": "explorerResourceIsFolder && resourceExtname != .comp",
+          "group": "navigation@13"
+        },
+        {
+          "command": "compositorBoard.importImages",
+          "when": "explorerResourceIsFolder && resourceExtname != .comp",
+          "group": "navigation@14"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "compositorBoard.showInSidebar",
+          "when": "view == compositorBoard.sidebar",
+          "group": "navigation@1"
+        },
+        {
+          "command": "compositorBoard.sidebar.openInEditor",
+          "when": "view == compositorBoard.sidebar",
+          "group": "navigation@2"
+        },
+        {
+          "command": "compositorBoard.openInCompositor",
+          "when": "view == compositorBoard.sidebar",
+          "group": "navigation@3"
+        },
+        {
+          "command": "compositorBoard.new",
+          "when": "view == compositorBoard.sidebar",
+          "group": "more@1"
+        },
+        {
+          "command": "compositorBoard.sidebar.close",
+          "when": "view == compositorBoard.sidebar",
+          "group": "more@2"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "compositorBoard.sidebar.openInEditor",
+          "when": "false"
+        },
+        {
+          "command": "compositorBoard.sidebar.close",
+          "when": "false"
+        },
+        {
+          "command": "compositorBoard.importImages",
+          "when": "compositorBoard.hasBoard"
+        },
+        {
+          "command": "compositorBoard.saveAs",
+          "when": "compositorBoard.hasBoard"
+        },
+        {
+          "command": "compositorBoard.exportPNG",
+          "when": "compositorBoard.hasBoard"
+        },
+        {
+          "command": "compositorBoard.exportJPEG",
+          "when": "compositorBoard.hasBoard"
+        },
+        {
+          "command": "compositorBoard.exportAs",
+          "when": "compositorBoard.hasBoard"
+        },
+        {
+          "command": "compositorBoard.closeBoard",
+          "when": "compositorBoard.hasBoard"
+        },
+        {
+          "command": "compositorBoard.newFromImages",
+          "when": "false"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "compositorBoard.new",
+          "when": "activeCustomEditorId == 'compositorBoard.board'",
+          "group": "navigation@1"
+        },
+        {
+          "command": "compositorBoard.exportAs",
+          "when": "activeCustomEditorId == 'compositorBoard.board'",
+          "group": "navigation@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Compositor Board",
+      "properties": {
+        "compositorBoard.autosaveDelay": {
+          "type": "number",
+          "default": 800,
+          "minimum": 0,
+          "description": "Milliseconds after the last edit before the board writes the project to disk, so Compositor and Claude see it. 0 turns autosave off (save with Cmd+S)."
+        },
+        "compositorBoard.bridge": {
+          "type": "boolean",
+          "default": true,
+          "description": "Let the Compositor Board Claude Code plugin read the live board (including strokes not yet saved) over a local connection on 127.0.0.1. Takes effect after reloading the window."
+        },
+        "compositorBoard.checkerboard": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show transparent areas as a checkerboard."
+        },
+        "compositorBoard.canvasOnly.workbench": {
+          "type": "string",
+          "enum": [
+            "none",
+            "maximizeGroup",
+            "zenMode",
+            "fullScreen"
+          ],
+          "default": "maximizeGroup",
+          "enumDescriptions": [
+            "Only the board hides its bars and panels.",
+            "Also maximize the board's editor group.",
+            "Also turn on Zen Mode.",
+            "Also make VS Code full screen."
+          ],
+          "description": "What View › Toggle Fullscreen (F) does around the board, besides showing the canvas alone on black."
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "compositorBoard",
+          "title": "Compositor Board",
+          "icon": "media/sidebar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "compositorBoard": [
+        {
+          "type": "webview",
+          "id": "compositorBoard.sidebar",
+          "name": "Board"
+        }
+      ]
+    },
+    "configurationDefaults": {
+      "workbench.editor.customLabels.patterns": {
+        "**/*.comp/manifest.json": "${dirname}"
+      }
+    },
+    "keybindings": [
+      {
+        "command": "compositorBoard.saveAs",
+        "key": "shift+ctrl+s",
+        "mac": "shift+cmd+s",
+        "when": "activeCustomEditorId == 'compositorBoard.board' || focusedView == 'compositorBoard.sidebar'"
+      },
+      {
+        "command": "compositorBoard.exportJPEG",
+        "key": "alt+shift+ctrl+s",
+        "mac": "alt+shift+cmd+s",
+        "when": "activeCustomEditorId == 'compositorBoard.board' || focusedView == 'compositorBoard.sidebar'"
+      },
+      {
+        "command": "compositorBoard.exportPNG",
+        "key": "shift+ctrl+e",
+        "mac": "shift+cmd+e",
+        "when": "activeCustomEditorId == 'compositorBoard.board' || focusedView == 'compositorBoard.sidebar'"
+      },
+      {
+        "command": "compositorBoard.exportAs",
+        "key": "alt+shift+ctrl+w",
+        "mac": "alt+shift+cmd+w",
+        "when": "activeCustomEditorId == 'compositorBoard.board' || focusedView == 'compositorBoard.sidebar'"
+      }
+    ]
+  }
+}

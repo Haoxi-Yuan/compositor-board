@@ -1,0 +1,16 @@
+.DS_Store
+node_modules/
+
+# Build output
+dist/
+engine/.build/
+engine/bin/
+
+# Copies made by scripts/sync-core.sh
+vscode-extension/core/
+vscode-extension/bin/
+claude-plugin/server/core/
+claude-plugin/server/bin/
+
+# Local test projects
+samples/

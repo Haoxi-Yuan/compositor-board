@@ -1,0 +1,12 @@
+{
+  "name": "compositor-board-local",
+  "description": "Local marketplace for the Compositor Board Claude Code plugin.",
+  "owner": { "name": "Haoxi Yuan" },
+  "plugins": [
+    {
+      "name": "compositor-board",
+      "source": "./claude-plugin",
+      "description": "Read and draw on Compositor (.comp) projects shared with the Compositor Board VS Code extension."
+    }
+  ]
+}

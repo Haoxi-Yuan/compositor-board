@@ -1,0 +1,110 @@
+/* Camera Raw Filter panel (media/camera-raw.js): docked full height at the board's right edge, 440 pt wide, padding 24
+   (UI/FilterSheet.swift:192-195, UI/FloatingPanel.swift:125-136). */
+.floating-panel.docked.craw-panel {
+    top: 0 !important;
+    right: 0;
+    bottom: 0;
+    left: auto !important;
+    width: 440px;
+    max-width: 100%;
+    max-height: none;
+    min-width: 0;
+    border-radius: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    padding: 24px;
+    gap: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+    outline: none;
+}
+.craw-panel.committing .craw-scroll { opacity: 0.6; }
+.craw-panel .panel-title { flex: none; }
+
+/* Histogram: 110 pt, black 35 %, corner 4; the clipping triangles at the top corners (CameraRawControls.swift:34-83). */
+.craw-histogram { position: relative; height: 110px; flex: none; background: rgba(0, 0, 0, 0.35); border-radius: 4px; overflow: hidden; }
+.craw-graph { position: absolute; inset: 0; width: 100%; height: 100%; }
+.craw-clip { position: absolute; top: 4px; border: 0; background: transparent; padding: 0; width: 12px; height: 12px; display: grid; place-items: center; cursor: default; }
+.craw-clip.left { left: 4px; }
+.craw-clip.right { right: 4px; }
+.craw-clip svg { width: 10px; height: 10px; }
+.craw-readout { font-size: 11px; color: var(--text2); font-variant-numeric: tabular-nums; font-family: ui-monospace, "SF Mono", Menlo, monospace; flex: none; }
+
+/* The scrolling column of sections; its scroller sits outside the content (CameraRawControls.swift:14-28). */
+.craw-scroll { flex: 1; min-height: 0; overflow-y: auto; margin-right: -20px; padding-right: 20px; }
+.craw-sections { display: flex; flex-direction: column; gap: 12px; }
+.craw-section { display: flex; flex-direction: column; gap: 8px; }
+.craw-header { display: flex; align-items: center; gap: 6px; }
+.craw-header .spacer { flex: 1; }
+.craw-disclosure { display: flex; align-items: center; gap: 6px; border: 0; background: transparent; color: var(--text); padding: 0; cursor: default; font: inherit; }
+.craw-chevron { width: 12px; display: grid; place-items: center; }
+.craw-chevron svg { width: 10px; height: 10px; stroke-width: 2.4; }
+.craw-title { font-size: 13px; font-weight: 600; }
+.craw-icon { border: 0; background: transparent; color: var(--text); padding: 0; width: 18px; height: 18px; display: grid; place-items: center; cursor: default; }
+.craw-icon svg { width: 14px; height: 14px; }
+.craw-icon:disabled { opacity: 0.4; }
+.craw-body { display: flex; flex-direction: column; gap: 8px; padding-left: 18px; }
+.craw-body:empty { display: none; }
+
+/* Rows: label, slider, field (CameraRawControls.swift:338-360). */
+.craw-row { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.craw-row.dim { opacity: 0.45; }
+.craw-label { white-space: nowrap; }
+.craw-label.scrub { cursor: ew-resize; }
+.craw-field { flex: none; text-align: right; }
+.craw-field.left { text-align: left; }
+.craw-nested { display: flex; flex-direction: column; gap: 8px; padding-left: 16px; }
+.craw-subheading { font-size: 12px; color: var(--text); font-weight: 500; }
+.craw-caption { font-size: 11px; color: var(--text2); line-height: 1.35; }
+.craw-caption.mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-variant-numeric: tabular-nums; }
+.craw-tiny { font-size: 10px; color: var(--text2); }
+.craw-hue-range { display: flex; flex-direction: column; gap: 4px; }
+.craw-popup { display: flex; align-items: center; gap: 8px; }
+.craw-fixed { align-self: flex-start; }
+.craw-segmented { align-self: stretch; display: flex; }
+.craw-segmented button { flex: 1; }
+
+/* The slider (CameraRawSlider): 22 pt high, a 4 pt bar, a round knob; gradient tracks fill the whole bar. */
+.craw-slider { position: relative; flex: 1; min-width: 60px; height: 22px; touch-action: none; }
+.craw-slider.disabled { pointer-events: none; }
+.craw-track { position: absolute; left: 0; right: 0; top: 9px; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.18); overflow: hidden; }
+.craw-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); }
+.craw-knob { position: absolute; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: #e8e8e8; box-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.6); }
+.craw-slider.gliding .craw-knob { transition: left 0.18s ease-out; }
+.craw-slider.gliding .craw-fill { transition: width 0.18s ease-out; }
+
+/* Eyedroppers and tool toggles: the accent color while armed. */
+.craw-arm { display: inline-flex; align-items: center; gap: 5px; border: 0; background: transparent; color: var(--text2); padding: 2px 4px; border-radius: 6px; cursor: default; font: inherit; align-self: flex-start; }
+.craw-arm.bordered { border: 1px solid var(--field-border); background: var(--field); color: var(--text); padding: 3px 9px; }
+.craw-arm svg { width: 14px; height: 14px; }
+.craw-arm.armed { color: var(--accent); }
+.craw-arm.bordered.armed { border-color: var(--accent); }
+.craw-plain { align-self: flex-start; }
+
+/* Color Grading wheels (GradeWheel): 86 pt, three across with 30 pt between. */
+.craw-wheels { display: flex; gap: 30px; }
+.craw-wheels.single { justify-content: flex-start; }
+.craw-wheel-box { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.craw-wheel-title { font-size: 11px; }
+.craw-wheel { width: 86px; height: 86px; touch-action: none; }
+.craw-wheel-readout { font-size: 10px; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-variant-numeric: tabular-nums; }
+
+/* Curve graph: 150 pt, black 35 %, corner 4. */
+.craw-curve-box { height: 150px; background: rgba(0, 0, 0, 0.35); border-radius: 4px; overflow: hidden; }
+.craw-curve { width: 100%; height: 100%; display: block; touch-action: none; }
+
+/* Mixer swatches: 18 pt circles (16 pt for picked colors), the selected one ringed white 2 pt. */
+.craw-swatches { display: flex; gap: 8px; }
+.craw-swatch { width: 18px; height: 18px; border-radius: 50%; border: 0; padding: 0; cursor: default; box-shadow: none; }
+.craw-swatch.small { width: 16px; height: 16px; }
+.craw-swatch.on { box-shadow: 0 0 0 2px #fff; }
+
+.craw-preview { flex: none; }
+.craw-error { color: #ff9f0a; flex: none; }
+.craw-limited { font-size: 12px; color: var(--text2); flex: none; }
+.craw-panel hr { border: 0; border-top: 1px solid var(--divider); margin: 0; width: 100%; flex: none; }
+.craw-panel .buttons { flex: none; display: flex; align-items: center; gap: 8px; }
+.craw-applying { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); }
