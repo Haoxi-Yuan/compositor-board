@@ -5,6 +5,11 @@
   "version": "0.6.6",
   "publisher": "haoxi-local",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Haoxi-Yuan/compositor-board.git",
+    "directory": "vscode-extension"
+  },
   "private": true,
   "engines": {
     "vscode": "^1.90.0"

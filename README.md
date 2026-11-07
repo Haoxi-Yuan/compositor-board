@@ -43,7 +43,7 @@ cd compositor-board
 engine/build.sh            # about 75 s; compiles compositor-engine from upstream/
 ./scripts/sync-core.sh     # copies core/ and the engine into both packages
 (cd claude-plugin/server && npm install)
-(cd vscode-extension && npx --yes @vscode/vsce package --allow-missing-repository --skip-license -o ../dist/)
+mkdir -p dist && (cd vscode-extension && npx --yes @vscode/vsce package -o ../dist/)
 code --install-extension dist/compositor-board-0.6.6.vsix
 claude plugin marketplace add "$PWD"
 claude plugin install compositor-board@compositor-board-local
